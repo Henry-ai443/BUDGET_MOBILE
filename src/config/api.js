@@ -1,1 +1,1 @@
-export const API_BASE_URL = 'http://10.111.4.25:3000/api';
+export const API_BASE_URL = 'https://budget-api-1-tfxa.onrender.com/api';

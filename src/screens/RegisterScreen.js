@@ -58,7 +58,7 @@ export default function RegisterScreen({ navigation }) {
       }
 
       Alert.alert('Success', 'Account created successfully', [
-        { text: 'Login', onPress: () => navigation.navigate('Login') },
+        { text: 'Continue', onPress: () => navigation.navigate('Transactions') },
       ]);
     } catch (error) {
       Alert.alert('Network Error', 'Unable to connect to server');

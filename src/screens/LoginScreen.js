@@ -31,7 +31,7 @@ export default function LoginScreen({ navigation }) {
     try {
       setLoading(true);
 
-      const response = await fetch(`${API_BASE_URL}/auth/login`, {
+      const response = await fetch(`https://budget-api-1-tfxa.onrender.com/api/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
@@ -51,8 +51,8 @@ export default function LoginScreen({ navigation }) {
         {
           text: 'Continue',
           onPress: () => {
-            // navigate to main app screen (replace 'Home' with your screen)
-            navigation.navigate('Home');
+            // navigate to Transactions screen
+            navigation.navigate('Transactions');
           },
         },
       ]);
