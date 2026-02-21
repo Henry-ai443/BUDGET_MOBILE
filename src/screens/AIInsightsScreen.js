@@ -9,6 +9,7 @@ import {
   RefreshControl,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useFocusEffect } from '@react-navigation/native';
 import { fetchInsights } from '../services/api';
 import theme from '../theme/theme';
 import styles from '../styles/AIInsightsStyles';
@@ -63,6 +64,13 @@ export default function AIInsightsScreen({ navigation }) {
     setLoading(true);
     loadInsights(selectedPeriod);
   }, [selectedPeriod, loadInsights]);
+
+  // Refresh insights when screen gains focus (after transaction deletion)
+  useFocusEffect(
+    useCallback(() => {
+      loadInsights(selectedPeriod);
+    }, [selectedPeriod, loadInsights])
+  );
 
   /**
    * Format currency display

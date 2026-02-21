@@ -9,6 +9,7 @@ import {
   Dimensions,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useFocusEffect } from '@react-navigation/native';
 import { LineChart, BarChart, PieChart } from 'react-native-chart-kit';
 import { fetchTransactions } from '../services/api';
 import theme from '../theme/theme';
@@ -187,6 +188,13 @@ export default function AnalyticsScreen({ navigation }) {
   useEffect(() => {
     loadAnalytics();
   }, [loadAnalytics]);
+
+  // Refresh analytics when screen gains focus (after transaction deletion)
+  useFocusEffect(
+    useCallback(() => {
+      loadAnalytics();
+    }, [loadAnalytics])
+  );
 
   /**
    * Format currency

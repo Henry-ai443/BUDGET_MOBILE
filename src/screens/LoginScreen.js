@@ -74,7 +74,7 @@ export default function LoginScreen({ navigation }) {
 
         <View style={styles.container}>
           <View style={styles.header}>
-            <Text style={styles.title}>BudgetApp</Text>
+            <Text style={styles.title}>Smart Cash</Text>
             <Text style={styles.subtitle}>Take control of your money effortlessly</Text>
           </View>
 

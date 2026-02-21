@@ -6,7 +6,6 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   Alert,
-  Picker,
   KeyboardAvoidingView,
   ScrollView,
 } from 'react-native';
@@ -15,6 +14,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { createTransaction } from '../services/api';
 import theme from '../theme/theme';
 import styles from '../styles/AddTransactionStyles';
+import { Picker } from '@react-native-picker/picker';     
 
 /**
  * Add Transaction Screen
@@ -98,7 +98,7 @@ export default function AddTransactionScreen({ navigation }) {
         },
         {
           text: 'View All',
-          onPress: () => navigation.navigate('TransactionsTab'),
+          onPress: () => navigation.navigate('Transactions'),
         },
       ]);
     } catch (error) {

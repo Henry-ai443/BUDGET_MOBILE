@@ -10,6 +10,7 @@ import {
   Dimensions,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useFocusEffect } from '@react-navigation/native';
 import { BarChart } from 'react-native-chart-kit';
 import { fetchTransactions } from '../services/api';
 import theme from '../theme/theme';
@@ -166,6 +167,13 @@ export default function SpendingBreakdownScreen({ navigation }) {
   useEffect(() => {
     loadBreakdown();
   }, [loadBreakdown]);
+
+  // Refresh breakdown when screen gains focus (after transaction deletion)
+  useFocusEffect(
+    useCallback(() => {
+      loadBreakdown();
+    }, [loadBreakdown])
+  );
 
   /**
    * Format currency

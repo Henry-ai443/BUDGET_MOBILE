@@ -9,7 +9,7 @@ import {
   Alert,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { fetchTransactions, logout } from '../services/api';
+import { fetchTransactions, deleteTransaction, logout } from '../services/api';
 import theme from '../theme/theme';
 import styles from '../styles/TransactionsListStyles';
 
@@ -132,16 +132,30 @@ export default function TransactionsListScreen({ navigation }) {
 
   /**
    * Handle transaction deletion
+   * Deletes from API and removes from local state
+   * Analytics and breakdown screens will automatically reflect the change
+   * on next load since they fetch fresh data from API
    */
   const handleDeleteTransaction = async (transactionId) => {
     try {
-      // TODO: Implement delete via API
-      // For now, filter from local state
+      // Call API to delete transaction
+      await deleteTransaction(transactionId);
+      
+      // Remove from local state immediately for UI feedback
       setTransactions((prev) => prev.filter((t) => t._id !== transactionId));
-      Alert.alert('Success', 'Transaction deleted');
+      
+      Alert.alert('Success', 'Transaction deleted successfully');
     } catch (err) {
-      Alert.alert('Error', 'Failed to delete transaction');
-      console.error(err);
+      Alert.alert('Error', 'Failed to delete transaction. Please try again.');
+      console.error('Delete transaction error:', err);
+      
+      // Reload transactions to ensure consistency with server
+      try {
+        const data = await fetchTransactions(1, 50);
+        setTransactions(data.transactions || []);
+      } catch (reloadErr) {
+        console.error('Failed to reload transactions:', reloadErr);
+      }
     }
   };
 
@@ -219,7 +233,7 @@ export default function TransactionsListScreen({ navigation }) {
       {/* Floating Action Button */}
       <TouchableOpacity
         style={styles.fab}
-        onPress={() => navigation.navigate('AddTransactionTab')}
+        onPress={() => navigation.navigate('AddTransaction')}
       >
         <Text style={styles.fabText}>➕</Text>
       </TouchableOpacity>

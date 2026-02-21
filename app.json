@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Budget-App",
+    "name": "Smart Cash",
     "slug": "Budget-App",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -20,10 +20,16 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.eng.henry.BudgetApp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "f447cefb-c07a-45e9-91d4-d813528cb63b"
+      }
     }
   }
 }

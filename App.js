@@ -1,8 +1,10 @@
 import React from 'react';
+import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Text } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
+
 import LoginScreen from './src/screens/LoginScreen';
 import RegisterScreen from './src/screens/RegisterScreen';
 import TransactionsListScreen from './src/screens/TransactionsListScreen';
@@ -44,7 +46,7 @@ function AppTabs() {
         component={TransactionsListScreen}
         options={{
           tabBarLabel: 'Transactions',
-          tabBarIcon: ({ color }) => <Text style={{ fontSize: 20, color }}>�</Text>,
+          tabBarIcon: ({ color }) => <Text style={{ fontSize: 20, color }}>💰</Text>,
         }}
       />
       <Tab.Screen
@@ -88,32 +90,37 @@ function AppTabs() {
  */
 export default function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName="Login"
-        screenOptions={{ headerShown: false }}
-      >
-        <Stack.Screen
-          name="Login"
-          component={LoginScreen}
-          options={{ animationEnabled: false }}
-        />
-        <Stack.Screen
-          name="Register"
-          component={RegisterScreen}
-          options={{ animationEnabled: false }}
-        />
-        <Stack.Screen
-          name="Transactions"
-          component={AppTabs}
-          options={{ animationEnabled: false }}
-        />
-        <Stack.Screen
-          name="AddTransaction"
-          component={AddTransactionScreen}
-          options={{ presentation: 'modal' }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <>
+      {/* StatusBar added here */}
+      <StatusBar style="dark" backgroundColor={theme.colors.green} />
+
+      <NavigationContainer>
+        <Stack.Navigator
+          initialRouteName="Login"
+          screenOptions={{ headerShown: false }}
+        >
+          <Stack.Screen
+            name="Login"
+            component={LoginScreen}
+            options={{ animationEnabled: false }}
+          />
+          <Stack.Screen
+            name="Register"
+            component={RegisterScreen}
+            options={{ animationEnabled: false }}
+          />
+          <Stack.Screen
+            name="Transactions"
+            component={AppTabs}
+            options={{ animationEnabled: false }}
+          />
+          <Stack.Screen
+            name="AddTransaction"
+            component={AddTransactionScreen}
+            options={{ presentation: 'modal' }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </>
   );
-}
+}  
