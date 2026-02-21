@@ -8,6 +8,8 @@ import RegisterScreen from './src/screens/RegisterScreen';
 import TransactionsListScreen from './src/screens/TransactionsListScreen';
 import AddTransactionScreen from './src/screens/AddTransactionScreen';
 import AIInsightsScreen from './src/screens/AIInsightsScreen';
+import AnalyticsScreen from './src/screens/AnalyticsScreen';
+import SpendingBreakdownScreen from './src/screens/SpendingBreakdownScreen';
 import ProfileScreen from './src/screens/ProfileScreen';
 import theme from './src/theme/theme';
 
@@ -42,15 +44,23 @@ function AppTabs() {
         component={TransactionsListScreen}
         options={{
           tabBarLabel: 'Transactions',
+          tabBarIcon: ({ color }) => <Text style={{ fontSize: 20, color }}>�</Text>,
+        }}
+      />
+      <Tab.Screen
+        name="AnalyticsTab"
+        component={AnalyticsScreen}
+        options={{
+          tabBarLabel: 'Analytics',
           tabBarIcon: ({ color }) => <Text style={{ fontSize: 20, color }}>📊</Text>,
         }}
       />
       <Tab.Screen
-        name="AddTransactionTab"
-        component={AddTransactionScreen}
+        name="BreakdownTab"
+        component={SpendingBreakdownScreen}
         options={{
-          tabBarLabel: 'Add',
-          tabBarIcon: ({ color }) => <Text style={{ fontSize: 20, color }}>➕</Text>,
+          tabBarLabel: 'Breakdown',
+          tabBarIcon: ({ color }) => <Text style={{ fontSize: 20, color }}>📈</Text>,
         }}
       />
       <Tab.Screen
@@ -102,10 +112,6 @@ export default function App() {
           name="AddTransaction"
           component={AddTransactionScreen}
           options={{ presentation: 'modal' }}
-        />
-        <Stack.Screen
-          name="Insights"
-          component={AIInsightsScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>
